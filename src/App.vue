@@ -19,7 +19,7 @@
         <button v-on:click="loadCliente" v-if="is_auth">Crear cliente</button>
         <button v-on:click="logout" v-if="is_auth">Cerrar sesión</button>
     </div>
-    <router-view></router-view>
+    <router-view v-on:completedLogin="completedLogin"></router-view>
   </div>
 </template>
 

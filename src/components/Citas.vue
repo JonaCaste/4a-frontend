@@ -4,13 +4,13 @@
         <!-- Creating Citas -->
         <div class="">
             <h4>Crea Cita Medica</h4>
-            <input v-model="transaction.idCita" class=""  placeholder="Usuario Origen">
-            <input v-model="transaction.pacienteId" class=""   placeholder="Usuario Destino">
-            <input v-model="transaction.profesionalId" class=""   placeholder="Valor">
-            <input v-model="transaction.fecha" class=""   placeholder="Valor">
-            <input v-model="transaction.especialidad" class=""   placeholder="Valor">
+            <input v-model="citaData.idCita" class=""  placeholder="Id cita">
+            <input v-model="citaData.pacienteId" class=""   placeholder="Id paciente">
+            <input v-model="citaData.profesionalId" class=""   placeholder="Id profesional">
+            <input v-model="citaData.fecha" class=""   placeholder="Fecha">
+            <input v-model="citaData.especialidad" class=""   placeholder="Especialidad">
 
-            <button v-on:click="CreateCita" class="">Envíar</button>
+            <button v-on:click="createCita" class="">Envíar</button>
         </div>
         <!-- Citas -->
         <table class="">
@@ -20,17 +20,17 @@
                     <th>Id Paciente</th>
                     <th>Id Profesional</th>
                     <th>Fecha</th>
-                    <th>especialidad</th>
+                    <th>Especialidad</th>
             
                 </tr>
             </thead>
             <tbody>
-                <tr v-for="citaData in citaByProfesional" :key="citaData.idCita">
-                    <td>{{citaData.idCita}}</td>
-                    <td>{{citaData.pacienteId}}</td>
-                    <td>{{citaData.profesionalId}}</td>
-                    <td>{{citaData.fecha}}</td>
-                    <td>{{citaData.especialidad}}</td>
+                <tr v-for="cita in citaByProfesional" :key="cita.idCita">
+                    <td>{{cita.idCita}}</td>
+                    <td>{{cita.pacienteId}}</td>
+                    <td>{{cita.profesionalId}}</td>
+                    <td>{{cita.fecha}}</td>
+                    <td>{{cita.especialidad}}</td>
                     
                 </tr>
             </tbody>
@@ -47,14 +47,25 @@ export default {
         return {
             username: localStorage.getItem("username") || "none",
          
-            citaByProfesional: [],
+            //datos para crear una cita
             citaData: {
-                "idCita": "",
-                "pacienteId": "",
-                "profesionalId": "",
-                "fecha": "",
-                "especialidad": ""
-            }
+                idCita: "",
+                pacienteId: "",
+                profesionalId: "",
+                fecha: "",
+                especialidad: ""
+            },
+
+            //estructura de la cita
+            cita: {
+                especialidad: "",
+                fecha: "",
+                profesionalId: "",
+                pacienteId: "",
+                idCita: "",
+            },
+            citaByProfesional: [],
+            
         }
     }, 
     apollo: {
