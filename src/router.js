@@ -19,6 +19,16 @@ const routes = [
     name: 'SignUp',
     component: SignUp
   },
+  {
+    path: '/profesional/citas',
+    name: 'Citas',
+    component: Citas
+  },
+  {
+    path: '/profesional/cliente',
+    name: 'Cliente',
+    component: Cliente
+  },
 ]
 
 const router = createRouter({

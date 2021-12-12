@@ -3,8 +3,8 @@
         <div class="form">
             <h3>Iniciar Sesión</h3>
             <form v-on:submit.prevent="processLogIn">
-                <input v-model="credentials.username" placeholder="Usuario"/>
-                <input v-model="credentials.password" type="password" placeholder="Contraseña"/>
+                <input v-model="profesionalLogin.username" placeholder="Usuario"/>
+                <input v-model="profesionalLogin.password" type="password" placeholder="Contraseña"/>
                 <p v-if="show_error" class="error">Usuario o contraseña incorrectos</p> 
                 <button v-bind:class="{'disabled': is_loading}">
                     <span v-if="!is_loading">Ingresar</span>
@@ -24,7 +24,7 @@ export default {
         return {
             show_error: false,
             is_loading: false,
-            credentials: {
+            profesionalLogin: {
                 username: "",
                 password: ""
             }
@@ -35,35 +35,35 @@ export default {
             this.is_loading = true;
 
             //los mutate siempre tienen mutation y variables
-            // await this.$apollo.mutate({
-            //     mutation: gql`
-            //         mutation Login($credentials: LoginInput!) {
-            //             login(credentials: $credentials) {
-            //                 key
-            //             }*/
-            //         }
-            //     `,
-            //     variables: {
-            //         credentials: this.credentials
-            //     }
-            // })
-            // .then((result) => {
-            //     console.log("FUNCIONÓOOO")
-            //     this.is_loading = false;
-            //     this.show_error = false;
-            //     let data = {
-            //         username: this.credentials.username,
-            //         token: result.data.login.key
-            //     }
-            //     //emitimos un mensaje al padre, para que oculte los botones
-            //     this.$emit("completedLogin", data);
-            // })
-            // .catch((error)=>{
-            //     this.show_error = true;
-            //     console.log("DIO ERROR :c")
-            //     console.log(error)
-            //     this.is_loading = false;
-            // })
+            await this.$apollo.mutate({
+                mutation: gql`
+                    mutation LoginProfesional($profesionalLogin: ProfesionalLogin!) {
+                        loginProfesional(profesionalLogin: $profesionalLogin) {
+                            key
+                        }
+                    }
+                `,
+                variables: {
+                    profesionalLogin: this.profesionalLogin
+                }
+            })
+            .then((result) => {
+                console.log("Peticion(Login profesional) exitosa")
+                this.is_loading = false;
+                this.show_error = false;
+                let data = {
+                    username: this.profesionalLogin.username,
+                    token: result.data.loginProfesional.key
+                }
+                //emitimos un mensaje al padre, para que oculte los botones
+                this.$emit("completedLogin", data);
+            })
+            .catch((error)=>{
+                this.show_error = true;
+                console.log("Peticion(Login profesional) errada")
+                console.log(error)
+                this.is_loading = false;
+            })
         }
     }, 
     created: function () {}

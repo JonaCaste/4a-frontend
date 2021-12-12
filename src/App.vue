@@ -40,7 +40,7 @@ export default {
       verifyAuth(){
         this.is_auth = localStorage.getItem("is_auth") || false;
         if(this.is_auth){
-          // this.loadTransactions();
+          this.loadCitas();
         }else{
           this.loadLogIn();
         }
@@ -54,17 +54,21 @@ export default {
         this.$router.push({name: "SignUp"});
       },
 
-      // loadCliente(){
-      //   this.$router.push({name: ""});
-      // },
+      loadCitas(){
+        this.$router.push({name: "Citas"});
+      },
 
-      // completedLogin(data){
-      //   this.is_auth = true;
-      //   localStorage.setItem("is_auth", true);
-      //   localStorage.setItem("token", data.token);
-      //   localStorage.setItem("username", data.username);
-      //   this.verifyAuth()
-      // },
+      loadCliente(){
+        this.$router.push({name: "Cliente"});
+      },
+
+      completedLogin(data){
+        this.is_auth = true;
+        localStorage.setItem("is_auth", true);
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("username", data.username);
+        this.verifyAuth()
+      },
 
       logout(){
         this.is_auth = false;

@@ -1,12 +1,13 @@
 <template>
     <div>
-        <div class="form">
+        <div class="form form-signup">
             <h3>Registro</h3>
             <form v-on:submit.prevent="processSignUp">
-                <input v-model="signupData.username" placeholder="Usuario"/>
-                <input v-model="signupData.password1" placeholder="Contraseña"/>
-                <input v-model="signupData.password2" placeholder="Confirmar Contraseña"/>
-                <input v-model="signupData.balance" placeholder="Balance"/>
+                <input v-model="profesionalData.username" placeholder="Usuario"/>
+                <input v-model="profesionalData.password" placeholder="Contraseña"/>
+                <input v-model="profesionalData.tipoDocumento" placeholder="Tipo de documento"/>
+                <input v-model="profesionalData.numeroDocumento" placeholder="Número de documento"/>
+                <input v-model="profesionalData.perfil" placeholder="Especialidad"/>
                 <p v-if="show_error" class="error">Usuario o contraseña incorrectos</p> 
                 <button v-bind:class="{'disabled': is_loading}">
                     <span v-if="!is_loading">Ingresar</span>
@@ -26,45 +27,48 @@ export default {
         return {
             show_error: false,
             is_loading: false,
-            signupData:{
-                /*username: "",
-                password1: "",
-                password2: "",
-                balance: ""*/
+            profesionalData:{
+                username: "",
+                password: "",
+                tipoDocumento: "",
+                numeroDocumento: "",
+                perfil: "",
             }
         }
     }, 
     methods: {
         processSignUp: async function(){
             this.is_loading = true;
-            this.signupData.balance = +this.signupData.balance;
-            // await this.$apollo.mutate({
-            //     mutation: gql`
-            //     mutation SignUp($signupData: SignupInput!) {
-            //         signUp(signupData: $signupData) {
-            //             key
-            //         }
-            //     }`,
-            //     variables: {
-            //         signupData: this.signupData
-            //     }
-            // })
-            // .then((result)=>{
-            //     console.log("FUNCIONÓOOO")
-            //     this.is_loading = false;
-            //     this.show_error = false;
-            //     let data = {
-            //         username: this.signupData.username,
-            //         token: result.data.signUp.key
-            //     }
-            //     this.$emit("completedLogin", data);
-            // })
-            // .catch((error)=>{
-            //     this.show_error = true;
-            //     console.log("DIO ERROR :c")
-            //     console.log(error)
-            //     this.is_loading = false;
-            // })
+
+            this.profesionalData.numeroDocumento = +this.profesionalData.numeroDocumento;
+            await this.$apollo.mutate({
+                mutation: gql`
+                    mutation CreateProfesional($profesionalData: ProfesionalSignup!) {
+                        createProfesional(profesionalData: $profesionalData) {
+                            key
+                        }
+                    }
+                `,
+                variables: {
+                    profesionalData: this.profesionalData
+                }
+            })
+            .then((result)=>{
+                console.log("Peticion(Signup profesional) exitosa")
+                this.is_loading = false;
+                this.show_error = false;
+                let data = {
+                    username: this.profesionalData.username,
+                    token: result.data.createProfesional.key
+                }
+                this.$emit("completedLogin", data);
+            })
+            .catch((error)=>{
+                this.show_error = true;
+                console.log("Peticion(Signup profesional) errada")
+                console.log(error)
+                this.is_loading = false;
+            })
         }
     }, 
     created: function () {}
@@ -73,4 +77,9 @@ export default {
 
 
 <style>
+
+    .form-signup{
+        top: 58%;
+    }
+
 </style>
