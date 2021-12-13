@@ -2,7 +2,7 @@
     <div class="">
         
         <!-- Creating Citas -->
-        <div class="nuevoUsuari">
+        <div class="nuevaCita">
             <h4>Crea Cita Medica</h4>
             <input v-model="citaData.idCita" class=""  placeholder="Id cita">
             <input v-model="citaData.pacienteId" class=""   placeholder="Id paciente">
@@ -13,7 +13,7 @@
             <button v-on:click="createCita" class="">Envíar</button>
         </div>
         <!-- Citas -->
-        <table class="">
+        <table class="tablaCitas">
             <thead>
                 <tr>
                     <th>Id Cita</th>
@@ -132,9 +132,55 @@ export default {
 
 <style scoped>
 
-.nuevoUsuari{
+.nuevaCita{
     display: flex;
     flex-direction: column;
+    width: 50%;
+    margin: 10px auto;
+}
+
+.nuevaCita input{
+    margin: 5px 0 5px 0;
+    padding: 10px;
+
+    border-radius: 5px;
+    border: 1px solid rgb(122, 122, 122);
+}
+
+.nuevaCita button{
+    margin: 5px 0 5px 0;
+    padding: 10px;
+
+    border-radius: 5px;
+    border: 1px solid #96e2e2;
+    background-color: #96e2e2;
+
+    transition: all .25s ease-out;
+}
+
+.nuevaCita button:hover{
+    background-color: #6ab8b8;
+}
+
+.tablaCitas{
+    margin: 50px auto 0 auto;
+
+    border-collapse: collapse;
+    
+    border: 3px solid #96e2e2;
+    border-radius: 10px !important;
+}
+
+.tablaCitas thead{
+    background-color: #96e2e2;
+}
+
+.tablaCitas thead tr th{
+    padding: 15px;
+}
+
+.tablaCitas tbody tr td{
+    padding: 10px;
 }
 
    
