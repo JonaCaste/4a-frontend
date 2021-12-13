@@ -3,6 +3,7 @@ import App          from "./App.vue";
 import LogIn        from "./components/LogIn.vue";
 import SignUp       from "./components/SignUp.vue";
 import Citas        from "./components/Citas.vue";
+import Cliente        from "./components/Cliente.vue";
 
 const routes = [
   {
@@ -25,11 +26,11 @@ const routes = [
     name: 'Citas',
     component: Citas
   },
-  // {
-  //   path: '/profesional/cliente',
-  //   name: 'Cliente',
-  //   component: Cliente
-  // },
+  {
+    path: '/profesional/cliente',
+    name: 'Cliente',
+    component: Cliente
+  },
 ]
 
 const router = createRouter({

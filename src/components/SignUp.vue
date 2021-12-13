@@ -8,7 +8,7 @@
                 <input v-model="profesionalData.tipoDocumento" placeholder="Tipo de documento"/>
                 <input v-model="profesionalData.numeroDocumento" placeholder="Número de documento"/>
                 <input v-model="profesionalData.perfil" placeholder="Especialidad"/>
-                <p v-if="show_error" class="error">Error al crear</p> 
+                <p v-if="show_error" class="error">Usuario o contraseña incorrectos</p> 
                 <button v-bind:class="{'disabled': is_loading}">
                     <span v-if="!is_loading">Ingresar</span>
                     <div v-if="is_loading" class="lds-dual-ring"></div>
