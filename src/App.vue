@@ -2,7 +2,7 @@
   <div id="app">
     <div class="nav">
       <div class="nav-titulo">
-        <img src="" alt="">
+        <img src="https://img.icons8.com/ios/100/000000/medical-doctor.png"/>
         <h2>Health app</h2>
       </div>
       <div class="nav-buttons">
@@ -11,7 +11,7 @@
         <button v-on:click="loadCliente" v-if="is_auth">Crear cliente</button>
         <button v-on:click="logout" v-if="is_auth">Cerrar sesión</button>
       </div>
-      <button v-on:click="navResponsive" class="button-nav-responsive">---</button>
+      <button v-on:click="navResponsive" class="button-nav-responsive"><img src="https://img.icons8.com/material-rounded/24/000000/menu.png"/></button>
     </div>
     <div class="nav-buttons-responsive" v-bind:class="{'nav-buttons-responsive_active': navResponsive_isActive}">
         <button v-on:click="loadLogIn" v-if="!is_auth">Ingresar</button>
@@ -19,7 +19,7 @@
         <button v-on:click="loadCliente" v-if="is_auth">Crear cliente</button>
         <button v-on:click="logout" v-if="is_auth">Cerrar sesión</button>
     </div>
-    <router-view></router-view>
+    <router-view v-on:completedLogin="completedLogin"></router-view>
   </div>
 </template>
 
@@ -126,6 +126,11 @@ export default {
   .nav-titulo{
     display: flex;
     align-items: center;
+  }
+
+  .nav-titulo img{
+    width: 50px;
+    padding-right: 10px;
   }
 
   .nav-buttons{
