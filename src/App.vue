@@ -11,7 +11,7 @@
         <button v-on:click="loadCliente" v-if="is_auth">Crear cliente</button>
         <button v-on:click="logout" v-if="is_auth">Cerrar sesión</button>
       </div>
-      <button v-on:click="navResponsive" class="button-nav-responsive">---</button>
+      <button v-on:click="navResponsive" class="button-nav-responsive"></button>
     </div>
     <div class="nav-buttons-responsive" v-bind:class="{'nav-buttons-responsive_active': navResponsive_isActive}">
         <button v-on:click="loadLogIn" v-if="!is_auth">Ingresar</button>

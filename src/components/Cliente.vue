@@ -3,9 +3,8 @@
         <div class="form form-signup">
             <h3>Registro Cliente</h3>
             <form v-on:submit.prevent="createCliente">
-                
-                <input v-model="clienteData.tipoDocumento" placeholder="Tipo de documento"/>
-                <input v-model="clienteData.numeroDocumento" placeholder="Numero de documento"/>
+                <input v-model="clienteData.tipoDocumento" placeholder="Tipo documento"/>
+                <input v-model="clienteData.numeroDocumento" placeholder="Número de documento"/>
                 <input v-model="clienteData.nombre" placeholder="Nombre"/>
                 <input v-model="clienteData.sexo" placeholder="Sexo"/>
                 <input v-model="clienteData.edad" placeholder="Edad"/>
@@ -42,9 +41,10 @@ export default {
             this.is_loading = true;
 
             this.clienteData.numeroDocumento = +this.clienteData.numeroDocumento;
+            this.clienteData.edad = +this.clienteData.edad;
             await this.$apollo.mutate({
                 mutation: gql`
-                    mutation CreateCliente($clienteData: ClienteInput!){
+                    mutation CreateCliente($clienteData: ClienteInput!) {
                         createCliente(clienteData: $clienteData) {
                         id
                         tipoDocumento
@@ -79,9 +79,4 @@ export default {
 
 
 <style>
-
-    .form-signup{
-        top: 58%;
-    }
-
 </style>
