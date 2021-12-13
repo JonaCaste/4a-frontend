@@ -3,12 +3,12 @@
         <div class="form form-signup">
             <h3>Registro Cliente</h3>
             <form v-on:submit.prevent="createCliente">
-                <input v-model="clienteData.id" placeholder="Usuario"/>
-                <input v-model="clienteData.tipoDocumento" placeholder="Contraseña"/>
-                <input v-model="clienteData.numeroDocumento" placeholder="Tipo de documento"/>
-                <input v-model="clienteData.nombre" placeholder="Número de documento"/>
-                <input v-model="clienteData.sexo" placeholder="Número de documento"/>
-                <input v-model="clienteData.edad" placeholder="Especialidad"/>
+                
+                <input v-model="clienteData.tipoDocumento" placeholder="Tipo de documento"/>
+                <input v-model="clienteData.numeroDocumento" placeholder="Numero de documento"/>
+                <input v-model="clienteData.nombre" placeholder="Nombre"/>
+                <input v-model="clienteData.sexo" placeholder="Sexo"/>
+                <input v-model="clienteData.edad" placeholder="Edad"/>
                 <p v-if="show_error" class="error">Error al crear</p> 
                 <button v-bind:class="{'disabled': is_loading}">
                     <span v-if="!is_loading">Ingresar</span>
@@ -29,7 +29,6 @@ export default {
             show_error: false,
             is_loading: false,
             clienteData:{
-                id: "",
                 tipoDocumento: "",
                 numeroDocumento: "",
                 nombre: "",
@@ -45,7 +44,7 @@ export default {
             this.clienteData.numeroDocumento = +this.clienteData.numeroDocumento;
             await this.$apollo.mutate({
                 mutation: gql`
-                    mutation Mutation($clienteData: ClienteInput!) {
+                    mutation CreateCliente($clienteData: ClienteInput!){
                         createCliente(clienteData: $clienteData) {
                         id
                         tipoDocumento
@@ -61,14 +60,14 @@ export default {
                 }
             })
             .then((result)=>{
-                console.log("Peticion(Signup profesional) exitosa")
+                console.log("Peticion(Signup cliente) exitosa")
                 this.is_loading = false;
                 this.show_error = false;
                 
             })
             .catch((error)=>{
                 this.show_error = true;
-                console.log("Peticion(Signup profesional) errada")
+                console.log("Peticion(Signup cliente) errada")
                 console.log(error)
                 this.is_loading = false;
             })

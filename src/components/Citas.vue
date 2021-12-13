@@ -2,7 +2,7 @@
     <div class="">
         
         <!-- Creating Citas -->
-        <div class="">
+        <div class="nuevoUsuari">
             <h4>Crea Cita Medica</h4>
             <input v-model="citaData.idCita" class=""  placeholder="Id cita">
             <input v-model="citaData.pacienteId" class=""   placeholder="Id paciente">
@@ -131,5 +131,11 @@ export default {
 
 
 <style scoped>
+
+.nuevoUsuari{
+    display: flex;
+    flex-direction: column;
+}
+
    
 </style>
